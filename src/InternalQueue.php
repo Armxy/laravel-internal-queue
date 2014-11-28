@@ -25,6 +25,7 @@ class InternalQueue extends SyncQueue
      * @param string      $job
      * @param mixed       $data
      * @param string|null $queue
+     * @param bool        $startNow
      *
      * @return int
      */
@@ -140,6 +141,14 @@ class InternalQueue extends SyncQueue
         return $id;
     }
 
+
+    /**
+     * Get next queued job from database.
+     *
+     * @param string|null        $queue
+     *
+     * @return int
+     */
     public function pop($queue = null){
 
         $queueModel = new Queue();

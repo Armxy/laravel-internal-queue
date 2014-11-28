@@ -1,6 +1,8 @@
 # Laravel 4/5 Internal Queue Driver
 
-## Push a function to the background.
+## Push a function to the background, run immediately or later.
+
+Fork from: https://github.com/barryvdh/laravel-async-queue
 
 This is internal queue which store queue into database.
 The only difference is that the closure is sent to the background without waiting for the response.
