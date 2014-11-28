@@ -2,6 +2,8 @@
 namespace Barryvdh\Queue;
 
 use Barryvdh\Queue\Models\Job;
+use Barryvdh\Queue\Models\LaqAsyncQueue;
+use Barryvdh\Queue\Jobs\AsyncJob;
 use Illuminate\Queue\SyncQueue;
 
 class AsyncQueue extends SyncQueue
@@ -26,10 +28,14 @@ class AsyncQueue extends SyncQueue
      *
      * @return int
      */
-    public function push($job, $data = '', $queue = null)
+    public function push($job, $data = '', $queue = null, $startNow = false)
     {
         $id = $this->storeJob($job, $data, 0);
-        $this->startProcess($id, 0);
+
+        if($startNow){
+
+            $this->startProcess($id, 0);
+        }
 
         return $id;
     }

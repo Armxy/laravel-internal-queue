@@ -47,7 +47,7 @@ class AsyncServiceProvider extends ServiceProvider
     protected function registerAsyncCommand($app)
     {
         $app['command.queue.async'] = $app->share(function ($app) {
-             return new AsyncCommand();
+            return new AsyncCommand();
         });
     }
 
