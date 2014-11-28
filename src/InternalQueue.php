@@ -1,12 +1,12 @@
 <?php
-namespace Barryvdh\Queue;
+namespace Armxy\Queue;
 
-use Barryvdh\Queue\Models\Job;
-use Barryvdh\Queue\Models\LaqAsyncQueue;
-use Barryvdh\Queue\Jobs\AsyncJob;
+use Armxy\Queue\Models\Job;
+use Armxy\Queue\Models\Queue;
+use Armxy\Queue\Jobs\InternalJob;
 use Illuminate\Queue\SyncQueue;
 
-class AsyncQueue extends SyncQueue
+class InternalQueue extends SyncQueue
 {
     /** @var array */
     protected $config;
@@ -88,7 +88,7 @@ class AsyncQueue extends SyncQueue
      */
     protected function getCommand($jobId, $delay = 0)
     {
-        $cmd = '%s artisan queue:async %d --env=%s --delay=%d';
+        $cmd = '%s artisan queue:internal %d --env=%s --delay=%d';
         $cmd = $this->getBackgroundCommand($cmd);
 
         $binary = $this->getPhpBinary();
@@ -138,6 +138,22 @@ class AsyncQueue extends SyncQueue
         $this->startProcess($id, $delay);
 
         return $id;
+    }
+
+    public function pop($queue = null){
+
+        $queueModel = new Queue();
+
+        $firstJob = $queueModel->getFirstQueue();
+
+        if($firstJob !== null){
+
+            $job = new InternalJob($this->container,  $firstJob);
+
+            return $job;
+        }
+
+        return null;
     }
 
 }

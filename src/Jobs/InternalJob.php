@@ -1,12 +1,12 @@
 <?php
 
-namespace Barryvdh\Queue\Jobs;
+namespace Armxy\Queue\Jobs;
 
-use Barryvdh\Queue\Models\Job;
+use Armxy\Queue\Models\Job;
 use Illuminate\Container\Container;
 use Illuminate\Queue\Jobs\SyncJob;
 
-class AsyncJob extends SyncJob
+class InternalJob extends SyncJob
 {
     /**
      * The job model.
@@ -19,7 +19,7 @@ class AsyncJob extends SyncJob
      * Create a new job instance.
      *
      * @param \Illuminate\Container\Container $container
-     * @param \Barryvdh\Queue\Models\Job      $job
+     * @param \Armxy\Queue\Models\Job      $job
      */
     public function __construct(Container $container, Job $job)
     {

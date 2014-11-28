@@ -9,13 +9,13 @@
 namespace Armxy\Queue\Models;
 
 
-class InternalQueue extends \Eloquent{
+class Queue extends \Eloquent{
 
-    protected $table = 'laq_async_queue';
+    protected $table = 'internal_queue';
 
     function getFirstQueue(){
 
-        $firstQueue = InternalQueue::where('status', '=', Job::STATUS_OPEN)->orderBy('created_at')->first();
+        $firstQueue = Queue::where('status', '=', Job::STATUS_OPEN)->orderBy('created_at')->first();
 
         if(!is_null($firstQueue)){
 

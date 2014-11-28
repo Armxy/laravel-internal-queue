@@ -1,39 +1,37 @@
-# Laravel 4/5 Async Queue Driver
+# Laravel 4/5 Internal Queue Driver
 
-## Push a function/closure to the background.
+## Push a function to the background.
 
-Just like the 'sync' driver, this is not a real queue driver. It is always fired immediatly.
+This is internal queue which store queue into database.
 The only difference is that the closure is sent to the background without waiting for the response.
 This package is more usable as an alternative for running incidental tasks in the background, without setting up a 'real' queue driver.
-
-> **Note:** If you are coming from 0.1.0 (or dev-master), you will need to run the migrations, since the new versions uses a database to store the queue.
 
 ### Install
 
 Require the latest version of this package with Composer
 
-    composer require barryvdh/laravel-async-queue
+    composer require armxy/laravel-internal-queue
 
 Add the Service Provider to the providers array in config/app.php
 
-    'Barryvdh\Queue\AsyncServiceProvider',
+    'Armxy\Queue\InternalQueueServiceProvider',
 
 You need to run the migrations for this package
 
-    $ php artisan migrate --package="barryvdh/laravel-async-queue"
+    $ php artisan migrate --package="armxy/laravel-internal-queue"
 
 Or publish them, so they are copied to your regular migrations
 
-    $ php artisan migrate:publish barryvdh/laravel-async-queue
+    $ php artisan migrate:publish armxy/laravel-internal-queue
 
-You should now be able to use the async driver in config/queue.php
+You should now be able to use the internal driver in config/queue.php
 
-    'default' => 'async',
+    'default' => 'internal',
 
     'connections' => array(
         ...
-        'async' => array(
-            'driver' => 'async',
+        'internal' => array(
+            'driver' => 'internal',
         ),
         ...
     }
@@ -42,8 +40,8 @@ By default, `php` is used as the binary path to PHP. You can change this by addi
 
     'connections' => array(
         ...
-        'async' => array(
-            'driver' => 'async',
+        'internal' => array(
+            'driver' => 'internal',
             'binary' => 'php',
             'binary_args' => '',
         ),

@@ -1,11 +1,11 @@
 <?php
 
-namespace Barryvdh\Queue\Connectors;
+namespace Armxy\Queue\Connectors;
 
-use Barryvdh\Queue\AsyncQueue;
+use Armxy\Queue\InternalQueue;
 use Illuminate\Queue\Connectors\ConnectorInterface;
 
-class AsyncConnector implements ConnectorInterface
+class InternalConnector implements ConnectorInterface
 {
     /**
      * Default configuration
@@ -27,6 +27,6 @@ class AsyncConnector implements ConnectorInterface
     public function connect(array $config)
     {
         $config = array_merge($this->defaults, $config);
-        return new AsyncQueue($config);
+        return new InternalQueue($config);
     }
 }

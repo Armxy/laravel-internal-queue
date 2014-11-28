@@ -1,21 +1,21 @@
 <?php
 
-namespace Barryvdh\Queue\Console;
+namespace Armxy\Queue\Console;
 
-use Barryvdh\Queue\Jobs\AsyncJob;
-use Barryvdh\Queue\Models\Job;
+use Armxy\Queue\Jobs\InternalJob;
+use Armxy\Queue\Models\Job;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class AsyncCommand extends Command
+class InternalCommand extends Command
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'queue:async';
+    protected $name = 'queue:internal';
 
     /**
      * The console command description.
@@ -37,7 +37,7 @@ class AsyncCommand extends Command
             sleep($delay);
         }
 
-        $job = new AsyncJob($this->laravel, $item);
+        $job = new InternalJob($this->laravel, $item);
 
         $job->fire();
     }

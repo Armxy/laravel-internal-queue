@@ -1,12 +1,12 @@
 <?php
 
-namespace Barryvdh\Queue;
+namespace Armxy\Queue;
 
-use Barryvdh\Queue\Connectors\AsyncConnector;
-use Barryvdh\Queue\Console\AsyncCommand;
+use Armxy\Queue\Connectors\InternalConnector;
+use Armxy\Queue\Console\InternalCommand;
 use Illuminate\Support\ServiceProvider;
 
-class AsyncServiceProvider extends ServiceProvider
+class InternalQueueServiceProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
@@ -22,9 +22,9 @@ class AsyncServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerAsyncConnector($this->app['queue']);
+        $this->registerInternalConnector($this->app['queue']);
 
-        $this->commands('command.queue.async');
+        $this->commands('command.queue.internal');
     }
 
     /**
@@ -34,7 +34,7 @@ class AsyncServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerAsyncCommand($this->app);
+        $this->registerInternalCommand($this->app);
     }
 
     /**
@@ -44,24 +44,24 @@ class AsyncServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerAsyncCommand($app)
+    protected function registerInternalCommand($app)
     {
-        $app['command.queue.async'] = $app->share(function ($app) {
-            return new AsyncCommand();
+        $app['command.queue.internal'] = $app->share(function ($app) {
+            return new InternalCommand();
         });
     }
 
     /**
-     * Register the Async queue connector.
+     * Register the Internal queue connector.
      *
      * @param \Illuminate\Queue\QueueManager $manager
      *
      * @return void
      */
-    protected function registerAsyncConnector($manager)
+    protected function registerInternalConnector($manager)
     {
-        $manager->addConnector('async', function () {
-            return new AsyncConnector();
+        $manager->addConnector('internal', function () {
+            return new InternalConnector();
         });
     }
 
@@ -72,6 +72,6 @@ class AsyncServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array('command.queue.async');
+        return array('command.queue.internal');
     }
 }

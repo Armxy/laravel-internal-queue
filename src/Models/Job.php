@@ -1,6 +1,6 @@
 <?php
 
-namespace Barryvdh\Queue\Models;
+namespace Armxy\Queue\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,6 +22,6 @@ class Job extends Model
     const STATUS_STARTED = 2;
     const STATUS_FINISHED = 3;
 
-    protected $table = 'laq_async_queue';
+    protected $table = 'internal_queue';
     protected $guarded = array('id', 'created_at', 'updated_at');
 }

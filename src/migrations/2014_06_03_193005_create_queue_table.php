@@ -13,7 +13,7 @@ class CreateQueueTable extends Migration
      */
     public function up()
     {
-        Schema::create('laq_async_queue', function (Blueprint $table) {
+        Schema::create('internal_queue', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('status')->default(0);
             $table->integer('retries')->default(0);
@@ -30,6 +30,6 @@ class CreateQueueTable extends Migration
      */
     public function down()
     {
-        Schema::drop('laq_async_queue');
+        Schema::drop('internal_queue');
     }
 }
