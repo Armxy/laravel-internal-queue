@@ -117,6 +117,16 @@ class InternalJob extends SyncJob
     }
 
     /**
+     * Get the name of the queue the job belongs to.
+     *
+     * @return string
+     */
+    public function getQueue()
+    {
+        return $this->getJobId();
+    }
+
+    /**
      * Get the job identifier.
      *
      * @return string
