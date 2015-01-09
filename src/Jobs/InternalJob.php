@@ -46,7 +46,7 @@ class InternalJob extends SyncJob
         $this->resolveAndFire($payload);
 
         // If job is not deleted, mark as finished
-        if (!$this->deleted) {
+        if (!$this->deleted && $this->job->status != Job::STATUS_OPEN) {
             $this->job->status = Job::STATUS_FINISHED;
             $this->job->save();
         }
@@ -74,13 +74,13 @@ class InternalJob extends SyncJob
         $this->job->status = Job::STATUS_OPEN;
         $this->job->save();
 
-        // Wait for the delay
+        /*// Wait for the delay
         if ($delay) {
             sleep($this->getSeconds($delay));
         }
 
         // Fire again
-        $this->fire();
+        $this->fire();*/
     }
 
     /**
