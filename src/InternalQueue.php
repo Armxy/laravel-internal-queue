@@ -105,7 +105,11 @@ class InternalQueue extends SyncQueue
      */
     protected function getPhpBinary()
     {
-        $path = escapeshellarg($this->config['binary']);
+        $path = $this->config['binary'];
+        if (!defined('PHP_WINDOWS_VERSION_BUILD')) {
+            $path = escapeshellarg($path);
+        }
+        
         $args = $this->config['binary_args'];
         if(is_array($args)){
             $args = implode(' ', $args);
