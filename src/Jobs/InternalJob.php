@@ -72,15 +72,14 @@ class InternalJob extends SyncJob
     {
         // Update the Job status
         $this->job->status = Job::STATUS_OPEN;
-        $this->job->save();
 
-        /*// Wait for the delay
+        // Wait for the delay
         if ($delay) {
+
             sleep($this->getSeconds($delay));
         }
 
-        // Fire again
-        $this->fire();*/
+        $this->job->save();
     }
 
     /**
